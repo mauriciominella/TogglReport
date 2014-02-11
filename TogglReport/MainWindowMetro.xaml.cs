@@ -35,8 +35,6 @@ namespace TogglReport
 
         public MainWindowMetro()
         {
-            SqlLite.InitialiseDB();
-
             this._Items = new ObservableCollection<TimeEntry>();
             TimeEntryRepository timeEntryCollection = new TimeEntryRepository();
             this._Items = timeEntryCollection.GetGroupingByDescAndDay();

@@ -5,30 +5,43 @@ using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TogglReport.Domain.Services;
 
 namespace TogglReport.Domain.Repository
 {
-    public class SqlLite
+    public class DbHelper
     {
-       private SQLiteConnection sqlite;
 
-       public static void InitialiseDB()
+        #region Singleton Implementation
+
+        private static DbHelper instance = new DbHelper();
+
+        public static DbHelper GetInstance()
+        {
+            return instance;
+        }
+
+        #endregion
+
+        private ConfigurationService _configService;
+
+        public DbHelper()
+        {
+            _configService = new ConfigurationService();
+            _configService.Load();
+        }
+
+       public void InitialiseDB()
        {
-           System.IO.File.Delete(@"C:\Repos\TogglReport\TogglReport\App_Data\ToogleDatabaseSqlLite.db");
-           System.IO.File.Copy(@"C:\Users\Mauricio\AppData\Roaming\TideSDK\com.toggl.toggldesktop\app_com.toggl.toggldesktop_0.localstorage", @"C:\Repos\TogglReport\TogglReport\App_Data\ToogleDatabaseSqlLite.db");
+           System.IO.File.Delete(_configService.TogglTemporaryDatabasePath.FullName);
+           System.IO.File.Copy(_configService.TogglDatabasePath.FullName, _configService.TogglTemporaryDatabasePath.FullName);
        }
 
-       public SqlLite()
-        {
-              //This part killed me in the beginning.  I was specifying "DataSource"
-              //instead of "Data Source"
-
-
-            sqlite = new SQLiteConnection(@"Data Source=C:\Repos\TogglReport\TogglReport\App_Data\ToogleDatabaseSqlLite.db");          
-        }
 
         public DataTable selectQuery(string query)
         {
+            SQLiteConnection sqlite = new SQLiteConnection(@"Data Source=" + _configService.TogglTemporaryDatabasePath.FullName);          
+
               SQLiteDataAdapter ad = null;
               DataTable dt = new DataTable();
 

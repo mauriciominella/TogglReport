@@ -18,7 +18,7 @@ namespace TogglReport.Domain.Repository
         {
             ObservableCollection<TimeEntry> timeEntryCollection = new ObservableCollection<TimeEntry>();
 
-            SqlLite db = new SqlLite();
+            DbHelper db = DbHelper.GetInstance();
             DataTable dt = db.selectQuery("SELECT * FROM ItemTable WHERE Key like 'TimeEntries%'");
 
             if (dt != null)
