@@ -1,0 +1,8 @@
+
+Toogle database path
+HKLM\System\CurrentControlSet\services\Tcpip\Parameters\DatabasePath
+
+
+C:\Users\Mauricio\AppData\Roaming\TideSDK\com.toggl.toggldesktop\app_com.toggl.toggldesktop_0.localstorage
+
+C:\Users\Mauricio\AppData\Roaming\TideSDK\com.toggl.toggldesktop\app_com.toggl.toggldesktop_0.localstorage-journal
