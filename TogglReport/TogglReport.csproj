@@ -126,6 +126,7 @@
     <Resource Include="Docs\DbSchema.PNG" />
     <Resource Include="Docs\ToogleDatabasePath.txt" />
     <Resource Include="Docs\ToogleDatabaseSqlLite.txt" />
+    <Resource Include="Docs\TestCaseScenario.PNG" />
     <Content Include="ExternalLibs\SQLite.Designer.dll" />
     <Content Include="ExternalLibs\SQLite.Interop.dll" />
     <Content Include="ExternalLibs\System.Data.SQLite.dll" />

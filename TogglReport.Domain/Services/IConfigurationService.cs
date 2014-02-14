@@ -13,6 +13,7 @@ namespace TogglReport.Domain.Services
 
         FileInfo TogglDatabasePath { get; }
         FileInfo TogglTemporaryDatabasePath { get; }
+        double TotalHoursPerDay { get; }
 
         #endregion
 

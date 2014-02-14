@@ -9,10 +9,38 @@ namespace TogglReport.Domain.Services
 {
     public class ConfigurationService : IConfigurationService
     {
+        #region Singleton Implementation
+
+        private static IConfigurationService instance = new ConfigurationService();
+
+        public static IConfigurationService GetInstance()
+        {
+            return instance;
+        }
+
+        #endregion
+
+        #region Constructors
+
+        public ConfigurationService()
+        {
+
+        }
+
+        public ConfigurationService(FileInfo togglDatabasePath, FileInfo togglTemporaryDatabasePath, double totalHoursPerDay)
+        {
+            this._togglDatabasePath = togglDatabasePath;
+            this._togglTemporaryDatabasePath = togglTemporaryDatabasePath;
+            this._totalHoursPerDay = totalHoursPerDay;
+        }
+
+        #endregion
+
         #region Members
 
         private FileInfo _togglDatabasePath = null;
         private FileInfo _togglTemporaryDatabasePath = null;
+        private double _totalHoursPerDay;
 
         #endregion
 
@@ -35,6 +63,14 @@ namespace TogglReport.Domain.Services
             }
         }
 
+        public double TotalHoursPerDay
+        {
+            get
+            {
+                return _totalHoursPerDay;
+            }
+        }
+
         #endregion
 
         #region Public Methods
@@ -44,10 +80,12 @@ namespace TogglReport.Domain.Services
             this._togglDatabasePath = new FileInfo(@"C:\Users\Mauricio\AppData\Roaming\TideSDK\com.toggl.toggldesktop\app_com.toggl.toggldesktop_0.localstorage");
             //this._togglTemporaryDatabasePath = new FileInfo(@"C:\Repos\TogglReport\TogglReport\App_Data\ToogleDatabaseSqlLite.db");
             this._togglTemporaryDatabasePath = new FileInfo(Environment.CurrentDirectory + "\\ToogleDatabaseSqlLite.db");
-            
+            this._totalHoursPerDay = 7.5;
         }
 
         #endregion
 
+
+        
     }
 }

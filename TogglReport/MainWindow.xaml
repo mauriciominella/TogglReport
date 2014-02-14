@@ -15,7 +15,7 @@
                 <DataGridTextColumn Header="Description" Binding="{Binding Path=description}"/>
                 <DataGridTextColumn Header="Start" Binding="{Binding Path=start, StringFormat=\{0:dd-MM-yy HH:mm:ss\}}"/>
                 <!--<DataGridTextColumn Header="End" Binding="{Binding Path=stop, StringFormat=\{0:dd-MM-yy HH:mm:ss\}}"/>-->
-                <!--<DataGridTextColumn Header="Duration" Binding="{Binding Path=duration}"/>-->
+                <DataGridTextColumn Header="Duration in Seconds" Binding="{Binding Path=duration}"/>
                 <DataGridTextColumn Header="Duration Time" Binding="{Binding Path=durationInHours}"/>
                 <DataGridTextColumn Header="Percent" Binding="{Binding Path=percent, StringFormat={}{0}%}"/>
                 <DataGridTextColumn Header="Hours Suggested" Binding="{Binding Path=hoursSuggested, StringFormat={}{0:#.00}}"/>

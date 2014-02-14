@@ -31,12 +31,11 @@ namespace TogglReport.Domain.Repository
             _configService.Load();
         }
 
-       public void InitialiseDB()
+        public void InitialiseDB()
        {
            System.IO.File.Delete(_configService.TogglTemporaryDatabasePath.FullName);
            System.IO.File.Copy(_configService.TogglDatabasePath.FullName, _configService.TogglTemporaryDatabasePath.FullName);
        }
-
 
         public DataTable selectQuery(string query)
         {
