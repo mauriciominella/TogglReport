@@ -13,7 +13,7 @@ namespace TogglReport.Domain.Services.Tests
 
 
         [TestMethod]
-        public void Rounded_Hours_Correctness_Using_Especfic_Scenario()
+        public void Rounded_Hours_Correctness_Using_Especfic_Scenario_1()
         {
             ConfigurationServiceBuilder configServiceBuilder = new ConfigurationServiceBuilder();
 
@@ -22,6 +22,23 @@ namespace TogglReport.Domain.Services.Tests
             TimeEntryCollectionService timeEntryCollectionService = new TimeEntryCollectionService(configService);
 
             BuildDataForTestingScenario1(timeEntryCollectionService);
+
+            timeEntryCollectionService.CalculateItems();
+
+            Assert.AreEqual(expectedTotalHoursRounded, timeEntryCollectionService.TotalHoursRounded);
+        }
+
+
+        [TestMethod]
+        public void Rounded_Hours_Correctness_Using_Especfic_Scenario_2()
+        {
+            ConfigurationServiceBuilder configServiceBuilder = new ConfigurationServiceBuilder();
+
+            IConfigurationService configService = configServiceBuilder.Build();
+
+            TimeEntryCollectionService timeEntryCollectionService = new TimeEntryCollectionService(configService);
+
+            BuildDataForTestingScenario2(timeEntryCollectionService);
 
             timeEntryCollectionService.CalculateItems();
 
@@ -66,6 +83,37 @@ namespace TogglReport.Domain.Services.Tests
                 description = "144269:6.4.4.2 Apps In Client: Limit editing of a Learner's applications where context doesn't match",
                 start = new DateTime(2014, 2, 11),
                 duration = 8298,
+            });
+        }
+
+        private void BuildDataForTestingScenario2(TimeEntryCollectionService timeEntryCollectionService)
+        {
+            timeEntryCollectionService.Add(new Model.TimeEntry()
+            {
+                description = "231386:PublishAssessmentResults message publishing when it is not viewable by Learner",
+                start = new DateTime(2014, 2, 19),
+                duration = 5724,
+            });
+
+            timeEntryCollectionService.Add(new Model.TimeEntry()
+            {
+                description = "230322:E2E_NLP_Grading Scheme Code is not updated in 158 and 162 instances",
+                start = new DateTime(2014, 2, 19),
+                duration = 9231,
+            });
+
+            timeEntryCollectionService.Add(new Model.TimeEntry()
+            {
+                description = "Meeting about Tafe Bugs",
+                start = new DateTime(2014, 2, 19),
+                duration = 1981,
+            });
+
+            timeEntryCollectionService.Add(new Model.TimeEntry()
+            {
+                description = "231764: E2E_ACN_CHESSN number is not saved in ebs4",
+                start = new DateTime(2014, 2, 19),
+                duration = 7323,
             });
         }
 

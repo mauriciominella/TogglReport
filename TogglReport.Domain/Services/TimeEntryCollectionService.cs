@@ -72,19 +72,30 @@ namespace TogglReport.Domain.Services
 
             double roundingDifference = _configService.TotalHoursPerDay - this.TotalHoursRounded;
 
+            double hoursToDistribute = 0.0;
+
             if (roundingDifference > 0)
+                hoursToDistribute = 0.5;
+            else if (roundingDifference < 0)
+                hoursToDistribute = -0.5;
+
+            DistributeHourToTimeEntries(roundingDifference, hoursToDistribute);
+
+            this._totalHoursRounded = this.Sum(c => c.hoursSuggestedRounded);
+        }
+
+        private void DistributeHourToTimeEntries(double roundingDifference, double hoursToDistribute)
+        {
+            if (hoursToDistribute != 0)
             {
-                int numberOfUnitsWithDifference = (int)(roundingDifference / 0.5);
+                int numberOfUnitsWithDifference = Math.Abs((int)(roundingDifference / 0.5));
 
                 //Distribuite the difference to all records
                 for (int i = 0; i < numberOfUnitsWithDifference; i++)
                 {
-                    this[i].hoursSuggestedRounded += 0.5;
+                    this[i].hoursSuggestedRounded += hoursToDistribute;
                 }
             }
-
-            this._totalHoursRounded = this.Sum(c => c.hoursSuggestedRounded);
-
         }
 
         #endregion
