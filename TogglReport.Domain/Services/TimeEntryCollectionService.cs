@@ -51,6 +51,7 @@ namespace TogglReport.Domain.Services
         public TimeEntryCollectionService()
         {
             _configService = ConfigurationService.GetInstance();
+            _configService.Load();
         }
 
         #endregion

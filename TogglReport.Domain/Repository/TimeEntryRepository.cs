@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TogglReport.Domain.Model;
 using TogglReport.Domain.Extensions;
+using TogglReport.Domain.Services;
 
 namespace TogglReport.Domain.Repository
 {
@@ -42,63 +43,55 @@ namespace TogglReport.Domain.Repository
             return timeEntryCollection;
         }
 
-        public ObservableCollection<TimeEntry> GetGroupingByDescAndDay()
+        public TimeEntryCollectionService GetGroupingByDescAndDay()
         {
             ObservableCollection<TimeEntry> allItems = this.GetAll();
-            ObservableCollection<TimeEntry> groupedItems = new ObservableCollection<TimeEntry>();
+            TimeEntryCollectionService collectionService = new TimeEntryCollectionService();
 
             var query2 = from a in allItems
                          group a by new { a.description, startDate = new DateTime(a.start.Year, a.start.Month, a.start.Day) } into g
                          select new { description = g.Key.description, start = g.Key.startDate, duration = g.Sum(c => c.duration )};
 
-            var totalDurationSum = query2.Sum(c => c.duration);
-
             foreach (var item in query2)
             {
-                groupedItems.Add(new TimeEntry
+                collectionService.Add(new TimeEntry
                 {
                     description = item.description,
                     duration = item.duration,
                     start = item.start,
-                    percent = (item.duration * 100 / totalDurationSum)
                 });
-            }
 
-            return groupedItems;
+           }
+
+            collectionService.CalculateItems();
+            
+            return collectionService;
 
         }
 
-        public ObservableCollection<TimeEntry> GetGroupingByDescAndDayForToday()
+        public TimeEntryCollectionService GetGroupingByDescAndDayForToday()
         {
-            ObservableCollection<TimeEntry> groupedItems = new ObservableCollection<TimeEntry>();
+            TimeEntryCollectionService collectionService = new TimeEntryCollectionService();
 
             DateTime today = DateTime.Now;
 
             IEnumerable<TimeEntry> groupedByDescAndDay = this.GetGroupingByDescAndDay().Where(c => c.start.Day == today.Day && c.start.Month == today.Month && c.start.Year == today.Year);
 
-            var totalDurationSum = groupedByDescAndDay.Sum(c => c.duration);
-
             foreach (var item in groupedByDescAndDay)
             {
-                groupedItems.Add(new TimeEntry
-                {
-                    description = item.description,
-                    duration = item.duration,
-                    start = item.start,
-                    percent = (item.duration * 100 / totalDurationSum),
-                    hoursSuggested = (totalHoursDay * (item.duration * 100 / totalDurationSum) / 100),
-                    hoursSuggestedRounded = (totalHoursDay * (item.duration * 100 / totalDurationSum) / 100).RoundI(0.5)
-                });
+                collectionService.Add(item);
             }
 
-            return groupedItems;
+            collectionService.CalculateItems();
+
+            return collectionService;
 
         }
 
 
-        public ObservableCollection<TimeEntry> GetGroupingByDescAndDayForYesterday()
+        public TimeEntryCollectionService GetGroupingByDescAndDayForYesterday()
         {
-            ObservableCollection<TimeEntry> groupedItems = new ObservableCollection<TimeEntry>();
+            TimeEntryCollectionService collectionService = new TimeEntryCollectionService();
 
             DateTime yesterday = DateTime.Now.AddDays(-1);
 
@@ -108,18 +101,12 @@ namespace TogglReport.Domain.Repository
 
             foreach (var item in groupedByDescAndDay)
             {
-                groupedItems.Add(new TimeEntry
-                {
-                    description = item.description,
-                    duration = item.duration,
-                    start = item.start,
-                    percent = (item.duration * 100 / totalDurationSum),
-                    hoursSuggested = (totalHoursDay * (item.duration * 100 / totalDurationSum) / 100),
-                    hoursSuggestedRounded = (totalHoursDay * (item.duration * 100 / totalDurationSum) / 100).RoundI(0.5)
-                });
+                collectionService.Add(item);
             }
 
-            return groupedItems;
+            collectionService.CalculateItems();
+
+            return collectionService;
 
         }
     }}
