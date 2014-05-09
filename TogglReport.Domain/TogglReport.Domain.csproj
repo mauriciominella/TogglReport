@@ -37,6 +37,7 @@
       <HintPath>..\TogglReport\ExternalLibs\SQLite.Designer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite">
       <HintPath>..\TogglReport\ExternalLibs\System.Data.SQLite.dll</HintPath>

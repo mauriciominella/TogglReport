@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -77,8 +78,12 @@ namespace TogglReport.Domain.Services
 
         public void Load()
         {
-            this._togglDatabasePath = new FileInfo(@"C:\Users\Mauricio\AppData\Roaming\TideSDK\com.toggl.toggldesktop\app_com.toggl.toggldesktop_0.localstorage");
-            //this._togglTemporaryDatabasePath = new FileInfo(@"C:\Repos\TogglReport\TogglReport\App_Data\ToogleDatabaseSqlLite.db");
+            if (String.IsNullOrEmpty(System.Configuration.ConfigurationManager.AppSettings["TogglDatabasePath"]))
+                throw new System.Configuration.SettingsPropertyNotFoundException("TogglDatabasePath");
+            
+            //this._togglDatabasePath = new FileInfo(@"C:\Users\Mauricio\AppData\Roaming\TideSDK\com.toggl.toggldesktop\app_com.toggl.toggldesktop_0.localstorage");
+
+            this._togglDatabasePath = new FileInfo(System.Configuration.ConfigurationManager.AppSettings["TogglDatabasePath"]);
             this._togglTemporaryDatabasePath = new FileInfo(Environment.CurrentDirectory + "\\ToogleDatabaseSqlLite.db");
             this._totalHoursPerDay = 7.5;
         }

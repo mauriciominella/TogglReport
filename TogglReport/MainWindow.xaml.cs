@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TogglReport.Domain.Model;
 using TogglReport.Domain.Repository;
+using TogglReport.Domain.Services;
 
 namespace TogglReport
 {
@@ -25,12 +26,26 @@ namespace TogglReport
     /// </summary>
     public partial class MainWindow : Window
     {
+        private double _totalRoundedHours = 0;
+
         private ObservableCollection<TimeEntry> _Items;
 
         public ObservableCollection<TimeEntry> Items
         {
             get { return _Items; }
             set { _Items = value; }
+        }
+
+        public double TotalRoundedHours
+        {
+            set
+            {
+                _totalRoundedHours = value;
+            }
+            get
+            {
+                return _totalRoundedHours;
+            }
         }
 
         public MainWindow()
@@ -55,10 +70,14 @@ namespace TogglReport
 
             DateTime today = DateTime.Now;
 
-            foreach (var item in timeEntryCollection.GetGroupingByDescAndDayForToday())
+            TimeEntryCollectionService timeentries = timeEntryCollection.GetGroupingByDescAndDayForToday();
+
+            foreach (var item in timeentries)
 	        {
                 this.Items.Add(item);
-	        } 
+	        }
+
+            //this.lblTotalRoundedHours.Text = timeentries.TotalHoursRounded.ToString();
         }
 
         private void All_Click(object sender, RoutedEventArgs e)
@@ -66,10 +85,13 @@ namespace TogglReport
             TimeEntryRepository timeEntryCollection = new TimeEntryRepository();
             this.Items.Clear();
 
-            foreach (var item in timeEntryCollection.GetGroupingByDescAndDay())
+            TimeEntryCollectionService timeentries = timeEntryCollection.GetGroupingByDescAndDay();
+
+            foreach (var item in timeentries)
             {
                 this.Items.Add(item);
             }
+
         }
 
         private void Yesterday_Click(object sender, RoutedEventArgs e)
@@ -77,12 +99,17 @@ namespace TogglReport
             TimeEntryRepository timeEntryCollection = new TimeEntryRepository();
             this.Items.Clear();
 
+            TimeEntryCollectionService timeentries = timeEntryCollection.GetGroupingByDescAndDayForYesterday();
+
             DateTime yesterday = DateTime.Now.AddDays(-1);
 
-            foreach (var item in timeEntryCollection.GetGroupingByDescAndDayForYesterday())
+            foreach (var item in timeentries)
             {
                 this.Items.Add(item);
             }
+
+            
+            //this.lblTotalRoundedHours.Text = timeentries.TotalHoursRounded.ToString();
         }
     }
 }

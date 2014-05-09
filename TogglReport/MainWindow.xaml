@@ -7,6 +7,7 @@
             <Button Content="Today" Margin="20,20,20,20" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Click="Today_Click"/>
             <Button Content="All" Margin="20,20,20,20" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Click="All_Click"/>
             <Button Content="Yesterday" Margin="20,20,20,20" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Click="Yesterday_Click"/>
+            <!--<TextBlock Name="lblTotalRoundedHours" Text="{Binding Path=TotalRoundedHours, UpdateSourceTrigger=PropertyChanged}"></TextBlock>-->
         </StackPanel>
         <DataGrid Name="ItemsGrid" 
              ItemsSource="{Binding Path=., Mode=OneWay, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" 
