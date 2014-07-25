@@ -109,4 +109,23 @@ namespace TogglReport.Domain.Repository
             return collectionService;
 
         }
+
+        public TimeEntryCollectionService GetGroupingByDescAndDayByDate(DateTime date)
+        {
+            TimeEntryCollectionService collectionService = new TimeEntryCollectionService();
+
+            IEnumerable<TimeEntry> groupedByDescAndDay = this.GetGroupingByDescAndDay().Where(c => c.start.Day == date.Day && c.start.Month == date.Month && c.start.Year == date.Year);
+
+            var totalDurationSum = groupedByDescAndDay.Sum(c => c.duration);
+
+            foreach (var item in groupedByDescAndDay)
+            {
+                collectionService.Add(item);
+            }
+
+            collectionService.CalculateItems();
+
+            return collectionService;
+
+        }
     }}

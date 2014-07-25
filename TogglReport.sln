@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TogglReport.Domain", "Toggl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TogglReport.Domain.Tests", "TogglReport.Domain.Tests\TogglReport.Domain.Tests.csproj", "{F3AC5E51-69C2-442A-860B-497F6A10487B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TogglReport.APIWrapper", "TogglReport.APIWrapper\TogglReport.APIWrapper.csproj", "{05488251-3FF6-40EC-9499-705DF6CB0A1E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{F3AC5E51-69C2-442A-860B-497F6A10487B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3AC5E51-69C2-442A-860B-497F6A10487B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3AC5E51-69C2-442A-860B-497F6A10487B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05488251-3FF6-40EC-9499-705DF6CB0A1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05488251-3FF6-40EC-9499-705DF6CB0A1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05488251-3FF6-40EC-9499-705DF6CB0A1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05488251-3FF6-40EC-9499-705DF6CB0A1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
