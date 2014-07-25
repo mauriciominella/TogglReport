@@ -11,11 +11,17 @@ using TogglReport.Domain.Services;
 
 namespace TogglReport.Domain.ViewModel
 {
-    public class ShellViewModel : PropertyChangedBase
+    public class ShellViewModel : Screen
     {
-        #region Properties
+        #region Members
 
         private DateTime _currentQueryDate;
+        private ObservableCollection<TimeEntry> _items;
+        private string _dayOfWeek = String.Empty;
+
+        #endregion
+
+        #region Properties
 
         public DateTime CurrentQueryDate
         {
@@ -27,18 +33,14 @@ namespace TogglReport.Domain.ViewModel
             }
         }
 
-        private ObservableCollection<TimeEntry> _Items;
-
         public ObservableCollection<TimeEntry> Items
         {
-            get { return _Items; }
+            get { return _items; }
             set {
-                _Items = value;
+                _items = value;
                 NotifyOfPropertyChange(() => Items);
             }
         }
-
-        private string _dayOfWeek = String.Empty;
 
         public string DayOfWeek
         {
@@ -58,6 +60,17 @@ namespace TogglReport.Domain.ViewModel
 
         public ShellViewModel()
         {
+
+        }
+
+        #endregion
+
+        #region Overrides / ViewModel Lifecycle
+
+        protected override void OnViewReady(object view)
+        {
+            base.OnViewReady(view);
+
             this.CurrentQueryDate = DateTime.Now.AddDays(-1);
             this.Items = new ObservableCollection<TimeEntry>();
             FilterItems();
@@ -79,15 +92,16 @@ namespace TogglReport.Domain.ViewModel
             }
             catch (Exception)
             {
-                var box = new ConfirmationBoxViewModel();
-                 WindowManager wm = new WindowManager();
-                 var result = wm.ShowDialog(box);
-                if(result == true)
-                {
-                // OK was clicked
-                }
+                ShowNoRecordsMessage();
             }
 
+        }
+
+        private void ShowNoRecordsMessage()
+        {
+            var box = new ConfirmationBoxViewModel();
+            WindowManager wm = new WindowManager();
+            var result = wm.ShowDialog(box);
         }
 
         #endregion
