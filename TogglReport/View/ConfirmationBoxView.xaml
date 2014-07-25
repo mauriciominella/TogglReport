@@ -1,0 +1,9 @@
+﻿<controls:MetroWindow x:Class="TogglReport.View.ConfirmationBoxView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="ConfirmationBoxView" Height="300" Width="300" ShowInTaskbar="False" ShowMaxRestoreButton="False" ShowCloseButton="true" ShowMinButton="False">
+    <Grid>
+        <Button x:Name="OK">There are no records for the current date!</Button>
+    </Grid>
+</controls:MetroWindow>

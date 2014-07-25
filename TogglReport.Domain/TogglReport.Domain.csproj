@@ -69,6 +69,8 @@
     <Compile Include="Repository\TimeEntryRepository.cs" />
     <Compile Include="Services\ConfigurationService.cs" />
     <Compile Include="Services\IConfigurationService.cs" />
+    <Compile Include="ViewModel\ConfirmationBoxViewModel.cs" />
+    <Compile Include="ViewModel\ShellViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

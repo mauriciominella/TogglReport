@@ -69,47 +69,6 @@ namespace TogglReport.Domain.Repository
 
         }
 
-        public TimeEntryCollectionService GetGroupingByDescAndDayForToday()
-        {
-            TimeEntryCollectionService collectionService = new TimeEntryCollectionService();
-
-            DateTime today = DateTime.Now;
-
-            IEnumerable<TimeEntry> groupedByDescAndDay = this.GetGroupingByDescAndDay().Where(c => c.start.Day == today.Day && c.start.Month == today.Month && c.start.Year == today.Year);
-
-            foreach (var item in groupedByDescAndDay)
-            {
-                collectionService.Add(item);
-            }
-
-            collectionService.CalculateItems();
-
-            return collectionService;
-
-        }
-
-
-        public TimeEntryCollectionService GetGroupingByDescAndDayForYesterday()
-        {
-            TimeEntryCollectionService collectionService = new TimeEntryCollectionService();
-
-            DateTime yesterday = DateTime.Now.AddDays(-1);
-
-            IEnumerable<TimeEntry> groupedByDescAndDay = this.GetGroupingByDescAndDay().Where(c => c.start.Day == yesterday.Day && c.start.Month == yesterday.Month && c.start.Year == yesterday.Year);
-
-            var totalDurationSum = groupedByDescAndDay.Sum(c => c.duration);
-
-            foreach (var item in groupedByDescAndDay)
-            {
-                collectionService.Add(item);
-            }
-
-            collectionService.CalculateItems();
-
-            return collectionService;
-
-        }
-
         public TimeEntryCollectionService GetGroupingByDescAndDayByDate(DateTime date)
         {
             TimeEntryCollectionService collectionService = new TimeEntryCollectionService();

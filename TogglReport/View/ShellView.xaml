@@ -1,0 +1,30 @@
+﻿<controls:MetroWindow x:Class="TogglReport.View.ShellView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="Toggl Report">
+    <StackPanel>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            <Button x:Name="PreviousDay" Content="Previous Day" Margin="20,20,20,20" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" />
+            <Button x:Name="Today" Content="Today" Margin="20,20,20,20" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" />
+            <Button x:Name="All" Content="All" Margin="20,20,20,20" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Visibility="Collapsed" />
+            <Button x:Name="Yesterday" Content="Yesterday" Margin="20,20,20,20" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Visibility="Collapsed" />
+            <Button x:Name="NextDay" Content="Next Day" Margin="20,20,20,20" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            <TextBlock x:Name="CurrentQueryDate" FontSize="30" Text="{Binding Path=CurrentQueryDate, StringFormat=dd-MM-yyyy}" />
+            <TextBlock x:Name="DayOfWeek" Text="{Binding Path=DayOfWeek, StringFormat=({0:P0})}" FontSize="30" />
+        </StackPanel>
+        <DataGrid x:Name="Items" 
+             AutoGenerateColumns="False" MaxHeight="300">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="description" Header="Description" MaxWidth="400" Binding="{Binding Path=description}"/>
+                <DataGridTextColumn Header="Start" Binding="{Binding Path=start, StringFormat=dd-MM-yyyy}"/>
+                <DataGridTextColumn Header="Duration" Binding="{Binding Path=durationInHours}"/>
+                <DataGridTextColumn Header="Percent" Binding="{Binding Path=percent, StringFormat={}{0}%}"/>
+                <DataGridTextColumn Header="Hours Suggested" Binding="{Binding Path=hoursSuggested, StringFormat={}{0:#.00}}"/>
+                <DataGridTextColumn Header="Hours Rounded" Binding="{Binding Path=hoursSuggestedRounded, StringFormat={}{0:#.00}}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
+    </controls:MetroWindow>
