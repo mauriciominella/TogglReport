@@ -37,7 +37,7 @@
       <HintPath>..\packages\Caliburn.Micro.2.0.0\lib\net45\Caliburn.Micro.Platform.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\TogglReport\ExternalLibs\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="SQLite.Designer">
       <HintPath>..\TogglReport\ExternalLibs\SQLite.Designer.dll</HintPath>
@@ -63,10 +63,12 @@
   <ItemGroup>
     <Compile Include="Extensions\DoubleExtensions.cs" />
     <Compile Include="Model\TimeEntry.cs" />
+    <Compile Include="Repository\ITimeEntryRepository.cs" />
+    <Compile Include="Repository\TimeEntryRepositoryWeb.cs" />
     <Compile Include="Services\TimeEntryCollectionService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\DbHelper.cs" />
-    <Compile Include="Repository\TimeEntryRepository.cs" />
+    <Compile Include="Repository\TimeEntryRepositorySqlite.cs" />
     <Compile Include="Services\ConfigurationService.cs" />
     <Compile Include="Services\IConfigurationService.cs" />
     <Compile Include="ViewModel\ConfirmationBoxViewModel.cs" />

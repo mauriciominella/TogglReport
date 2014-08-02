@@ -82,7 +82,7 @@ namespace TogglReport.Domain.ViewModel
 
         private void FilterItems()
         {
-            TimeEntryRepository timeEntryCollection = new TimeEntryRepository();
+            ITimeEntryRepository timeEntryCollection = new TimeEntryRepositoryWeb();
             this.Items.Clear();
 
             try
@@ -117,7 +117,7 @@ namespace TogglReport.Domain.ViewModel
 
         public void All()
         {
-            TimeEntryRepository timeEntryCollection = new TimeEntryRepository();
+            ITimeEntryRepository timeEntryCollection = new TimeEntryRepositoryWeb();
             this.Items.Clear();
 
             TimeEntryCollectionService timeentries = timeEntryCollection.GetGroupingByDescAndDay();

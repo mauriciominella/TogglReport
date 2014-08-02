@@ -11,7 +11,7 @@ using TogglReport.Domain.Services;
 
 namespace TogglReport.Domain.Repository
 {
-    public class TimeEntryRepository
+    public class TimeEntryRepositorySqlite : ITimeEntryRepository
     {
         private const double totalHoursDay = 7.5;
 
@@ -50,7 +50,7 @@ namespace TogglReport.Domain.Repository
 
             var query2 = from a in allItems
                          group a by new { a.description, startDate = new DateTime(a.start.Year, a.start.Month, a.start.Day) } into g
-                         select new { description = g.Key.description, start = g.Key.startDate, duration = g.Sum(c => c.duration )};
+                         select new { description = g.Key.description, start = g.Key.startDate, duration = g.Sum(c => c.duration) };
 
             foreach (var item in query2)
             {
@@ -61,10 +61,10 @@ namespace TogglReport.Domain.Repository
                     start = item.start,
                 });
 
-           }
+            }
 
             collectionService.CalculateItems();
-            
+
             return collectionService;
 
         }
@@ -87,4 +87,5 @@ namespace TogglReport.Domain.Repository
             return collectionService;
 
         }
-    }}
+    }
+}

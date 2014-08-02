@@ -21,7 +21,7 @@ namespace TogglReport
 
         void App_Startup(object sender, StartupEventArgs e)
         {
-            DbHelper.GetInstance().InitialiseDB();
+            //DbHelper.GetInstance().InitialiseDB();
         }
     }
 }
