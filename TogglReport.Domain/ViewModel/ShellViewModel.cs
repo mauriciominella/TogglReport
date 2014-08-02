@@ -18,6 +18,7 @@ namespace TogglReport.Domain.ViewModel
         private DateTime _currentQueryDate;
         private ObservableCollection<TimeEntry> _items;
         private string _dayOfWeek = String.Empty;
+        private bool _loadingData = false;
 
         #endregion
 
@@ -51,6 +52,19 @@ namespace TogglReport.Domain.ViewModel
             {
                 _dayOfWeek = value;
                 NotifyOfPropertyChange(() => DayOfWeek);
+            }
+        }
+
+        public bool LoadingData
+        {
+            get
+            {
+                return _loadingData;
+            }
+            set
+            {
+                _loadingData = value;
+                NotifyOfPropertyChange(() => LoadingData);
             }
         }
 

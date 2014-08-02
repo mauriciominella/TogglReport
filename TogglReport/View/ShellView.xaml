@@ -15,6 +15,10 @@
             <TextBlock x:Name="CurrentQueryDate" FontSize="30" Text="{Binding Path=CurrentQueryDate, StringFormat=dd-MM-yyyy}" />
             <TextBlock x:Name="DayOfWeek" Text="{Binding Path=DayOfWeek, StringFormat=({0:P0})}" FontSize="30" />
         </StackPanel>
+        <StackPanel x:Name="LoadingData" Orientation="Vertical" HorizontalAlignment="Center">
+            <controls:ProgressRing IsActive="True" />
+            <Label>Loading data...</Label>
+        </StackPanel>
         <DataGrid x:Name="Items" 
              AutoGenerateColumns="False" MaxHeight="300">
             <DataGrid.Columns>
