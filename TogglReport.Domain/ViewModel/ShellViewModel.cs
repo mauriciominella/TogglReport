@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using TogglReport.Domain.Model;
 using TogglReport.Domain.Repository;
@@ -96,24 +97,48 @@ namespace TogglReport.Domain.ViewModel
 
         private void FilterItems()
         {
-            ITimeEntryRepository timeEntryCollection = new TimeEntryRepositoryWeb();
+            LoadingData = true;
             this.Items.Clear();
 
-            try
-            {
-                TimeEntryCollectionService timeentries = timeEntryCollection.GetGroupingByDescAndDayByDate(CurrentQueryDate);
-                this.Items = timeentries;
-            }
-            catch (Exception)
-            {
-                ShowNoRecordsMessage();
-            }
+            FilterItemsAsync(
+                () =>
+                {
+                    LoadingData = false;
+                },
+                (Exception ex) =>
+                {
+                    LoadingData = false;
 
+                    Caliburn.Micro.Execute.OnUIThread(ShowNoRecordsMessage);;
+                });
+        }
+
+        private void FilterItemsAsync(System.Action sucesscallBack, Action<Exception> errorCallback)
+        {
+            ThreadPool.QueueUserWorkItem(_ =>
+            {
+                try
+                {
+                    ITimeEntryRepository timeEntryCollection = new TimeEntryRepositoryWeb();
+
+                    TimeEntryCollectionService timeentries = timeEntryCollection.GetGroupingByDescAndDayByDate(CurrentQueryDate);
+                    this.Items = timeentries;
+                }
+                catch (ThreadAbortException) { /* dont report on this */ }
+                catch (Exception ex)
+                {
+                    if (errorCallback != null) errorCallback(ex);
+                }
+                // note: this will not be called if the thread is aborted
+                if (sucesscallBack != null) sucesscallBack();
+
+            });
         }
 
         private void ShowNoRecordsMessage()
         {
             var box = new ConfirmationBoxViewModel();
+            
             WindowManager wm = new WindowManager();
             var result = wm.ShowDialog(box);
         }

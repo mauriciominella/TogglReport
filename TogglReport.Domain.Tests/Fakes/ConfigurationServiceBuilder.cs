@@ -71,6 +71,9 @@ namespace TogglReport.Domain.Tests.Fakes
 
         #endregion
 
-
+        public string TogglApiToken
+        {
+            get { throw new NotImplementedException(); }
+        }
     }
 }

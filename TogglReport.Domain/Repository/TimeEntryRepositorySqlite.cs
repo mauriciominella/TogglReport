@@ -82,8 +82,6 @@ namespace TogglReport.Domain.Repository
                 collectionService.Add(item);
             }
 
-            collectionService.CalculateItems();
-
             return collectionService;
 
         }
