@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -20,6 +21,7 @@ namespace TogglReport.Domain.ViewModel
         private ObservableCollection<TimeEntry> _items;
         private string _dayOfWeek = String.Empty;
         private bool _loadingData = false;
+        private string _instalationPath = String.Empty;
 
         #endregion
 
@@ -69,13 +71,26 @@ namespace TogglReport.Domain.ViewModel
             }
         }
 
+        public string InstalationPath
+        {
+            get
+            {
+                return _instalationPath;
+            }
+            set
+            {
+                _instalationPath = value;
+                NotifyOfPropertyChange(() => InstalationPath);
+            }
+        }
+
         #endregion
 
         #region Constructors
 
         public ShellViewModel()
         {
-
+            SetInstalationPath();
         }
 
         #endregion
@@ -141,6 +156,20 @@ namespace TogglReport.Domain.ViewModel
             
             WindowManager wm = new WindowManager();
             var result = wm.ShowDialog(box);
+        }
+
+
+        private void SetInstalationPath()
+        {
+            //Get the assembly information
+            System.Reflection.Assembly assemblyInfo = System.Reflection.Assembly.GetExecutingAssembly();
+
+            //Location is where the assembly is run from 
+            string assemblyLocation = assemblyInfo.Location;
+
+            //CodeBase is the location of the ClickOnce deployment files
+            Uri uriCodeBase = new Uri(assemblyInfo.CodeBase);
+            InstalationPath = Path.GetDirectoryName(uriCodeBase.LocalPath.ToString());
         }
 
         #endregion
