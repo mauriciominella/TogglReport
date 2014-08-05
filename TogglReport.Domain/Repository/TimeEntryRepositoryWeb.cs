@@ -21,9 +21,9 @@ namespace TogglReport.Domain.Repository
 
         public TimeEntryRepositoryWeb()
         {
-            ConfigurationService.GetInstance().Load();
+            UserSettingsService userSettingsService = new UserSettingsService();
 
-            _userPass = ConfigurationService.GetInstance().TogglApiToken + ":api_token";
+            _userPass = userSettingsService.GetApiToken() + ":api_token";
             _userpassB64 = Convert.ToBase64String(Encoding.Default.GetBytes(_userPass.Trim()));
             _authHeader = "Basic " + _userpassB64;
         }

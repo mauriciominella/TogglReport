@@ -42,7 +42,6 @@ namespace TogglReport.Domain.Services
         private FileInfo _togglDatabasePath = null;
         private FileInfo _togglTemporaryDatabasePath = null;
         private double _totalHoursPerDay;
-        private string _togglApiToken = String.Empty;
 
         #endregion
 
@@ -73,13 +72,6 @@ namespace TogglReport.Domain.Services
             }
         }
 
-        public string TogglApiToken
-        {
-            get {
-                return _togglApiToken;
-            }
-        }
-
         #endregion
 
         #region Public Methods
@@ -89,12 +81,11 @@ namespace TogglReport.Domain.Services
             if (String.IsNullOrEmpty(System.Configuration.ConfigurationManager.AppSettings["TogglDatabasePath"]))
                 throw new System.Configuration.SettingsPropertyNotFoundException("TogglDatabasePath");
 
-            if (String.IsNullOrEmpty(System.Configuration.ConfigurationManager.AppSettings["TogglApiToken"]))
-                throw new System.Configuration.SettingsPropertyNotFoundException("TogglApiToken");
+            //if (String.IsNullOrEmpty(System.Configuration.ConfigurationManager.AppSettings["TogglApiToken"]))
+            //    throw new System.Configuration.SettingsPropertyNotFoundException("TogglApiToken");
              
             //this._togglDatabasePath = new FileInfo(@"C:\Users\Mauricio\AppData\Roaming\TideSDK\com.toggl.toggldesktop\app_com.toggl.toggldesktop_0.localstorage");
 
-            this._togglApiToken = System.Configuration.ConfigurationManager.AppSettings["TogglApiToken"];
             this._togglDatabasePath = new FileInfo(System.Configuration.ConfigurationManager.AppSettings["TogglDatabasePath"]);
             this._togglTemporaryDatabasePath = new FileInfo(Environment.CurrentDirectory + "\\ToogleDatabaseSqlLite.db");
             this._totalHoursPerDay = 7.5;

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>ToastinetWP</id>
+    <version>1.4.5</version>
+    <title>Toastinet - toast notification for xaml apps</title>
+    <authors>Guillaume DEMICHELI</authors>
+    <owners>Guillaume DEMICHELI</owners>
+    <licenseUrl>http://opensource.org/licenses/MS-PL</licenseUrl>
+    <projectUrl>http://toastinet.codeplex.com/</projectUrl>
+    <iconUrl>http://suismoi.fr/toast.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Implement a toast notifications in Windows 8, Windows Phone, WPF &amp; Silverlight applications. This control is similar to a toast notification but it's not. You can set duration, style, logo, text &amp; animation of the notification.
+
+Animations: LeftToLeft, LeftToRight, RightToLeft, RIghtToRight, Vertical, Rotation</description>
+    <releaseNotes>Add FamilyFont dependancy property allowing you to set a custom font to toastinet.
+Thanks to msiccdev.</releaseNotes>
+    <language>en-US</language>
+    <tags>notification toast winrt windows phone wp control wp7 wp8 wpf w8 4.5 xaml popup toastr toolkit</tags>
+  </metadata>
+</package>

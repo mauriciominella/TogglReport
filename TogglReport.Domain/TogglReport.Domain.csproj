@@ -59,9 +59,14 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="ToastinetWPF">
+      <HintPath>..\packages\ToastinetWP.1.4.5\lib\net45\ToastinetWPF.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\DoubleExtensions.cs" />
+    <Compile Include="Model\Setting.cs" />
+    <Compile Include="Model\UserSettings.cs" />
     <Compile Include="Model\TimeEntry.cs" />
     <Compile Include="Repository\ITimeEntryRepository.cs" />
     <Compile Include="Repository\TimeEntryRepositoryWeb.cs" />
@@ -71,6 +76,7 @@
     <Compile Include="Repository\TimeEntryRepositorySqlite.cs" />
     <Compile Include="Services\ConfigurationService.cs" />
     <Compile Include="Services\IConfigurationService.cs" />
+    <Compile Include="Services\UserSettingsService.cs" />
     <Compile Include="ViewModel\ConfirmationBoxViewModel.cs" />
     <Compile Include="ViewModel\ShellViewModel.cs" />
   </ItemGroup>

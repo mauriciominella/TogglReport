@@ -22,10 +22,24 @@ namespace TogglReport.Domain.ViewModel
         private string _dayOfWeek = String.Empty;
         private bool _loadingData = false;
         private string _instalationPath = String.Empty;
+        private string _notificationMessage;
+        private string _apiToken = String.Empty;
+
+        private UserSettingsService _userSettingsService;
 
         #endregion
 
         #region Properties
+
+        public string NotificationMessage
+        {
+            get { return _notificationMessage; }
+            set
+            {
+                _notificationMessage = value;
+                NotifyOfPropertyChange(() => NotificationMessage);
+            }
+        }
 
         public DateTime CurrentQueryDate
         {
@@ -84,12 +98,26 @@ namespace TogglReport.Domain.ViewModel
             }
         }
 
+        public string ApiToken
+        {
+            get
+            {
+                return _apiToken;
+            }
+            set
+            {
+                _apiToken = value;
+                NotifyOfPropertyChange(() => ApiToken);
+            }
+        }
+
         #endregion
 
         #region Constructors
 
         public ShellViewModel()
         {
+            _userSettingsService = new UserSettingsService();
             SetInstalationPath();
         }
 
@@ -103,6 +131,7 @@ namespace TogglReport.Domain.ViewModel
 
             this.CurrentQueryDate = DateTime.Now.AddDays(-1);
             this.Items = new ObservableCollection<TimeEntry>();
+            this.ApiToken = _userSettingsService.GetApiToken();
             FilterItems();
         }
 
@@ -152,12 +181,14 @@ namespace TogglReport.Domain.ViewModel
 
         private void ShowNoRecordsMessage()
         {
-            var box = new ConfirmationBoxViewModel();
+            //var box = new ConfirmationBoxViewModel();
             
+            //WindowManager wm = new WindowManager();
+            //var result = wm.ShowDialog(box);
+            this.NotificationMessage = "There are not records";
             WindowManager wm = new WindowManager();
-            var result = wm.ShowDialog(box);
+            
         }
-
 
         private void SetInstalationPath()
         {
@@ -210,6 +241,17 @@ namespace TogglReport.Domain.ViewModel
         {
             CurrentQueryDate = CurrentQueryDate.AddDays(1);
             FilterItems();
+        }
+
+        public void SaveApiToken(string apiToken)
+        {
+            _userSettingsService.SaveApiToken(apiToken);
+            this.ApiToken = apiToken;
+        }
+
+        public bool CanSaveApiToken(string apiToken)
+        {
+            return apiToken.Length > 0;
         }
 
         #endregion
