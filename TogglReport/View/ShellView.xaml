@@ -38,11 +38,16 @@
                 </StackPanel>
             </TabItem>
             <TabItem Header="Configuration">
-                <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Center">
-                    <Label FontSize="30" HorizontalAlignment="Center">Api token</Label>
-                    <TextBox x:Name="ApiToken" Width="230" HorizontalContentAlignment="Center" />
-                    <!--<TextBox IsReadOnly="True" x:Name="InstalationPath" BorderThickness="0" />-->
-                    <Button x:Name="SaveApiToken" Content="Save" Margin="0,20,0,0" VerticalAlignment="Top" Width="100" HorizontalAlignment="Center" />
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Center">
+                        <Label FontSize="30" HorizontalAlignment="Center">Instalation path</Label>
+                        <TextBox IsReadOnly="True" x:Name="InstalationPath" BorderThickness="0" />
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,20,0,0">
+                        <Label FontSize="30" HorizontalAlignment="Center">Api token</Label>
+                        <TextBox x:Name="ApiToken" Width="230" HorizontalContentAlignment="Center" />
+                        <Button x:Name="SaveApiToken" Content="Save" Margin="0,20,0,0" VerticalAlignment="Top" Width="100" HorizontalAlignment="Center" />
+                    </StackPanel>
                 </StackPanel>
             </TabItem>
         </TabControl>
