@@ -115,8 +115,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AppBootstrapper.cs" />
-    <Compile Include="CaliburnCustom\CustomWindowManager.cs" />
-    <Compile Include="CaliburnCustom\ICustomWindowManager.cs" />
     <Compile Include="View\ConfirmationBoxView.xaml.cs">
       <DependentUpon>ConfirmationBoxView.xaml</DependentUpon>
     </Compile>
