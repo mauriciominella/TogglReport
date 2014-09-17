@@ -43,6 +43,9 @@
       <HintPath>..\TogglReport\ExternalLibs\SQLite.Designer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.Composition.Registration" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite">
@@ -76,7 +79,11 @@
     <Compile Include="Repository\TimeEntryRepositorySqlite.cs" />
     <Compile Include="Services\ConfigurationService.cs" />
     <Compile Include="Services\IConfigurationService.cs" />
+    <Compile Include="Services\TimesheetCalculationService.cs" />
     <Compile Include="Services\UserSettingsService.cs" />
+    <Compile Include="ViewModel\BraviEntriesViewModel.cs" />
+    <Compile Include="ViewModel\TogglEntriesViewModel.cs" />
+    <Compile Include="ViewModel\ConfigurationViewModel.cs" />
     <Compile Include="ViewModel\ConfirmationBoxViewModel.cs" />
     <Compile Include="ViewModel\ShellViewModel.cs" />
   </ItemGroup>

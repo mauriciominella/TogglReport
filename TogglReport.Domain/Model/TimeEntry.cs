@@ -36,5 +36,7 @@ namespace TogglReport.Domain.Model
         public double percent { get; set; }
         public double hoursSuggested { get; set; }
         public double hoursSuggestedRounded { get; set; }
+
+        public bool isTimesheet { get; set; }
     }
 }

@@ -13,9 +13,9 @@ namespace TogglReport.Domain.Repository
     {
         ObservableCollection<TimeEntry> GetAll();
 
-        TimeEntryCollectionService GetGroupingByDescAndDay();
+        TimeEntryCollection GetGroupingByDescAndDay();
 
-        TimeEntryCollectionService GetGroupingByDescAndDayByDate(DateTime date);
+        TimeEntryCollection GetGroupingByDescAndDayByDate(DateTime date);
 
     }
 }

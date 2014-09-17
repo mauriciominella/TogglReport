@@ -39,14 +39,13 @@ namespace TogglReport.Domain.Repository
                 }
             }
 
-
             return timeEntryCollection;
         }
 
-        public TimeEntryCollectionService GetGroupingByDescAndDay()
+        public TimeEntryCollection GetGroupingByDescAndDay()
         {
             ObservableCollection<TimeEntry> allItems = this.GetAll();
-            TimeEntryCollectionService collectionService = new TimeEntryCollectionService();
+            TimeEntryCollection timeEntryCollection = new TimeEntryCollection();
 
             var query2 = from a in allItems
                          group a by new { a.description, startDate = new DateTime(a.start.Year, a.start.Month, a.start.Day) } into g
@@ -54,7 +53,7 @@ namespace TogglReport.Domain.Repository
 
             foreach (var item in query2)
             {
-                collectionService.Add(new TimeEntry
+                timeEntryCollection.Add(new TimeEntry
                 {
                     description = item.description,
                     duration = item.duration,
@@ -63,15 +62,13 @@ namespace TogglReport.Domain.Repository
 
             }
 
-            collectionService.CalculateItems();
-
-            return collectionService;
+            return timeEntryCollection;
 
         }
 
-        public TimeEntryCollectionService GetGroupingByDescAndDayByDate(DateTime date)
+        public TimeEntryCollection GetGroupingByDescAndDayByDate(DateTime date)
         {
-            TimeEntryCollectionService collectionService = new TimeEntryCollectionService();
+            TimeEntryCollection timeEntryCollection = new TimeEntryCollection();
 
             IEnumerable<TimeEntry> groupedByDescAndDay = this.GetGroupingByDescAndDay().Where(c => c.start.Day == date.Day && c.start.Month == date.Month && c.start.Year == date.Year);
 
@@ -79,10 +76,10 @@ namespace TogglReport.Domain.Repository
 
             foreach (var item in groupedByDescAndDay)
             {
-                collectionService.Add(item);
+                timeEntryCollection.Add(item);
             }
 
-            return collectionService;
+            return timeEntryCollection;
 
         }
     }

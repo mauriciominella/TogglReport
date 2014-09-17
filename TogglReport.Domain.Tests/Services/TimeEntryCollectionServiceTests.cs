@@ -19,7 +19,7 @@ namespace TogglReport.Domain.Services.Tests
 
             IConfigurationService configService = configServiceBuilder.Build();
 
-            TimeEntryCollectionService timeEntryCollectionService = new TimeEntryCollectionService(configService);
+            TimeEntryCollection timeEntryCollectionService = new TimeEntryCollection(configService);
 
             BuildDataForTestingScenario1(timeEntryCollectionService);
 
@@ -36,7 +36,7 @@ namespace TogglReport.Domain.Services.Tests
 
             IConfigurationService configService = configServiceBuilder.Build();
 
-            TimeEntryCollectionService timeEntryCollectionService = new TimeEntryCollectionService(configService);
+            TimeEntryCollection timeEntryCollectionService = new TimeEntryCollection(configService);
 
             BuildDataForTestingScenario2(timeEntryCollectionService);
 
@@ -53,7 +53,7 @@ namespace TogglReport.Domain.Services.Tests
 
             IConfigurationService configService = configServiceBuilder.Build();
 
-            TimeEntryCollectionService timeEntryCollectionService = new TimeEntryCollectionService(configService);
+            TimeEntryCollection timeEntryCollectionService = new TimeEntryCollection(configService);
 
             BuildDataForTestingARandomScenario(timeEntryCollectionService);
 
@@ -62,7 +62,7 @@ namespace TogglReport.Domain.Services.Tests
             Assert.AreEqual(expectedTotalHoursRounded, timeEntryCollectionService.TotalHoursRounded);
         }
 
-        private void BuildDataForTestingScenario1(TimeEntryCollectionService timeEntryCollectionService)
+        private void BuildDataForTestingScenario1(TimeEntryCollection timeEntryCollectionService)
         {
             timeEntryCollectionService.Add(new Model.TimeEntry()
             {
@@ -86,7 +86,7 @@ namespace TogglReport.Domain.Services.Tests
             });
         }
 
-        private void BuildDataForTestingScenario2(TimeEntryCollectionService timeEntryCollectionService)
+        private void BuildDataForTestingScenario2(TimeEntryCollection timeEntryCollectionService)
         {
             timeEntryCollectionService.Add(new Model.TimeEntry()
             {
@@ -118,7 +118,7 @@ namespace TogglReport.Domain.Services.Tests
         }
 
 
-        private void BuildDataForTestingARandomScenario(TimeEntryCollectionService timeEntryCollectionService)
+        private void BuildDataForTestingARandomScenario(TimeEntryCollection timeEntryCollectionService)
         {
             var randomGenereatedList = Builder<TimeEntry>.CreateListOfSize(100)
                            .TheFirst(1)

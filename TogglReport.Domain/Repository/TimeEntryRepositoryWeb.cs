@@ -68,10 +68,10 @@ namespace TogglReport.Domain.Repository
             return list;
         }
 
-        public TimeEntryCollectionService GetGroupingByDescAndDay()
+        public TimeEntryCollection GetGroupingByDescAndDay()
         {
             ObservableCollection<TimeEntry> allItems = this.GetAll();
-            TimeEntryCollectionService collectionService = new TimeEntryCollectionService();
+            TimeEntryCollection collectionService = new TimeEntryCollection();
 
             var query2 = from a in allItems
                          group a by new { a.description, startDate = new DateTime(a.start.Year, a.start.Month, a.start.Day) } into g
@@ -88,14 +88,14 @@ namespace TogglReport.Domain.Repository
 
             }
 
-            collectionService.CalculateItems();
+            //collectionService.CalculateItems();
 
             return collectionService;
         }
 
-        public TimeEntryCollectionService GetGroupingByDescAndDayByDate(DateTime date)
+        public TimeEntryCollection GetGroupingByDescAndDayByDate(DateTime date)
         {
-            TimeEntryCollectionService collectionService = new TimeEntryCollectionService();
+            TimeEntryCollection collectionService = new TimeEntryCollection();
 
             IEnumerable<TimeEntry> groupedByDescAndDay = this.GetGroupingByDescAndDay().Where(c => c.start.Day == date.Day && c.start.Month == date.Month && c.start.Year == date.Year);
 
@@ -106,7 +106,7 @@ namespace TogglReport.Domain.Repository
                 collectionService.Add(item);
             }
 
-            collectionService.CalculateItems();
+            //collectionService.CalculateItems();
 
             return collectionService;
         }

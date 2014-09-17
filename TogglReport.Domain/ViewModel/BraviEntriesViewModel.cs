@@ -8,17 +8,12 @@ using System.Threading.Tasks;
 
 namespace TogglReport.Domain.ViewModel
 {
-    [Export]
-    public class ConfirmationBoxViewModel : Screen
+    [Export(typeof(IScreen))]
+    public class BraviEntriesViewModel : Screen
     {
-        public void OK()
+        public BraviEntriesViewModel()
         {
-            TryClose(true);
+            DisplayName = "Bravi Time";
         }
-
-        public void Cancel()
-        {
-            TryClose(false);
-        } 
     }
 }

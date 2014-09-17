@@ -10,95 +10,44 @@ using TogglReport.Domain.Model;
 
 namespace TogglReport.Domain.Services
 {
-    public class TimeEntryCollectionService : ObservableCollection<TimeEntry>
+    public class TimeEntryCollection : ObservableCollection<TimeEntry>
     {
         #region Members
 
         private IConfigurationService _configService;
-        private double _totalDurationTime = 0;
-        private double _totalHoursRounded = 0;
 
-        #endregion
-
-        #region Properties
-
-        public double TotalDurationTime
-        {
-            get
-            {
-                return _totalDurationTime;
-            }
-        
-        }
-
-        public double TotalHoursRounded
-        {
-            get
-            {
-                return _totalHoursRounded;
-            }
-        }
 
         #endregion
 
         #region Constructores
 
-        public TimeEntryCollectionService(IConfigurationService configService)
+        public TimeEntryCollection(IConfigurationService configService)
         {
             _configService = configService;
+            this.CollectionChanged += TimeEntryCollection_CollectionChanged;
         }
 
-        public TimeEntryCollectionService()
+        public TimeEntryCollection()
         {
             _configService = ConfigurationService.GetInstance();
             _configService.Load();
+            this.CollectionChanged += TimeEntryCollection_CollectionChanged;
         }
 
         #endregion
 
-        #region Public Methods
+        #region Private Methods
 
-        public void CalculateItems()
+        private void TimeEntryCollection_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            this._totalDurationTime = this.Sum(c => c.duration);
-
-            foreach (var item in this)
+            foreach (var item in  e.NewItems.Cast<TimeEntry>())
             {
-                item.percent = (item.duration * 100 / TotalDurationTime);
-                item.hoursSuggested = (_configService.TotalHoursPerDay * (item.duration * 100 / TotalDurationTime) / 100);
-                item.hoursSuggestedRounded = (_configService.TotalHoursPerDay * (item.duration * 100 / TotalDurationTime) / 100).RoundI(0.5);
-            }
-
-            this._totalHoursRounded = this.Sum(c => c.hoursSuggestedRounded);
-
-            double roundingDifference = _configService.TotalHoursPerDay - this.TotalHoursRounded;
-
-            double hoursToDistribute = 0.0;
-
-            if (roundingDifference > 0)
-                hoursToDistribute = 0.5;
-            else if (roundingDifference < 0)
-                hoursToDistribute = -0.5;
-
-            DistributeHourToTimeEntries(roundingDifference, hoursToDistribute);
-
-            this._totalHoursRounded = this.Sum(c => c.hoursSuggestedRounded);
-        }
-
-        private void DistributeHourToTimeEntries(double roundingDifference, double hoursToDistribute)
-        {
-            if (hoursToDistribute != 0)
-            {
-                int numberOfUnitsWithDifference = Math.Abs((int)(roundingDifference / 0.5));
-
-                //Distribuite the difference to all records
-                for (int i = 0; i < numberOfUnitsWithDifference; i++)
-                {
-                    this[i].hoursSuggestedRounded += hoursToDistribute;
-                }
+                item.isTimesheet = true;
             }
         }
+
 
         #endregion
+
     }
 }
