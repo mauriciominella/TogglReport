@@ -31,12 +31,15 @@
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
-            <Button x:Name="PreviousDay" Content="Previous Day" Margin="20,20,20,20" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" />
-            <Button x:Name="Today" Content="Today" Margin="20,20,20,20" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" />
-            <Button x:Name="All" Content="All" Margin="20,20,20,20" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Visibility="Collapsed" />
-            <Button x:Name="Yesterday" Content="Yesterday" Margin="20,20,20,20" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Visibility="Collapsed" />
-            <Button x:Name="NextDay" Content="Next Day" Margin="20,20,20,20" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" />
-            <Button x:Name="CalculateTimeSheet" Content="Calculate" Margin="20,20,20,20" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" />
+            <Button x:Name="PreviousDay" Content="Previous Day" Margin="20,10,20,10" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Style="{DynamicResource SquareButtonStyle}" />
+            <Button x:Name="Today" Content="Today" Margin="20,10,20,10" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Style="{DynamicResource SquareButtonStyle}" />
+            <Button x:Name="All" Content="All" Margin="20,10,20,10" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Visibility="Collapsed" Style="{DynamicResource SquareButtonStyle}" />
+            <Button x:Name="Yesterday" Content="Yesterday" Margin="20,10,20,10" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Visibility="Collapsed" Style="{DynamicResource SquareButtonStyle}" />
+            <Button x:Name="NextDay" Content="Next Day" Margin="20,10,20,10" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Style="{DynamicResource SquareButtonStyle}" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
+            <Button x:Name="ReloadData" Content="Reload data" Margin="20,10,20,10" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Style="{DynamicResource SquareButtonStyle}" />
+            <Button x:Name="CalculateTimeSheet" Content="Calculate" Margin="20,10,20,10" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Style="{StaticResource AccentedSquareButtonStyle}" />
         </StackPanel>
     </StackPanel>
 </UserControl>

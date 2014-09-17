@@ -40,9 +40,12 @@ namespace TogglReport.Domain.Services
 
         private void TimeEntryCollection_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            foreach (var item in  e.NewItems.Cast<TimeEntry>())
+            if (e.NewItems != null)
             {
-                item.isTimesheet = true;
+                foreach (var item in e.NewItems.Cast<TimeEntry>())
+                {
+                    item.isTimesheet = true;
+                }
             }
         }
 

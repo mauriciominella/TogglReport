@@ -145,6 +145,11 @@ namespace TogglReport.Domain.ViewModel
             this.Items = new ObservableCollection<TimeEntry>(_calculationService.CalculatedList);
         }
 
+        public void ReloadData()
+        {
+            this.FilterItems();
+        }
+
         #endregion
 
         #region Private Methods
