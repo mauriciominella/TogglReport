@@ -35,7 +35,9 @@ namespace TogglReport.Domain.ViewModel
             tabOrder.Add(typeof(BraviEntriesViewModel), 2);
             tabOrder.Add(typeof(ConfigurationViewModel), 3);
 
-            Items.AddRange(viewModels.OrderBy(t => tabOrder[t.GetType()]));
+            IOrderedEnumerable<IScreen> orderedScreens = viewModels.OrderBy(t => tabOrder[t.GetType()]);
+
+            Items.AddRange(orderedScreens.Except(orderedScreens.OfType<BraviEntriesViewModel>()));
         }
 
         #endregion
