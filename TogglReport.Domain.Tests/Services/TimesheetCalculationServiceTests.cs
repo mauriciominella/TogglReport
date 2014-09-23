@@ -12,19 +12,28 @@ namespace TogglReport.Domain.Services.Tests
     {
         private const double expectedTotalHoursRounded = 7.5;
 
+        ConfigurationServiceBuilder configServiceBuilder = null;
+        IConfigurationService configService = null;
+        TimesheetCalculationService calculationService = null;
+        List<TimeEntry> timeEntryList = new List<TimeEntry>();
+
+        [TestInitialize]
+        public void Setup()
+        {
+            configServiceBuilder = new ConfigurationServiceBuilder();
+            configService = configServiceBuilder.Build();
+            calculationService = new TimesheetCalculationService(configService);
+            timeEntryList.Clear();
+        }
+
 
         [TestMethod]
         public void Rounded_Hours_Correctness_Using_Especfic_Scenario_1()
         {
-            ConfigurationServiceBuilder configServiceBuilder = new ConfigurationServiceBuilder();
-            IConfigurationService configService = configServiceBuilder.Build();
-            TimesheetCalculationService calculationService = new TimesheetCalculationService(configService);
-            List<TimeEntry> timeEntryList = new List<TimeEntry>();
-
             BuildDataForTestingScenario1(timeEntryList);
 
             calculationService.CalculateItems(timeEntryList);
-
+            
             Assert.AreEqual(expectedTotalHoursRounded, calculationService.TotalHoursRounded);
         }
 
@@ -32,11 +41,6 @@ namespace TogglReport.Domain.Services.Tests
         [TestMethod]
         public void Rounded_Hours_Correctness_Using_Especfic_Scenario_2()
         {
-            ConfigurationServiceBuilder configServiceBuilder = new ConfigurationServiceBuilder();
-            IConfigurationService configService = configServiceBuilder.Build();
-            TimesheetCalculationService calculationService = new TimesheetCalculationService(configService);
-            List<TimeEntry> timeEntryList = new List<TimeEntry>();
-
             BuildDataForTestingScenario2(timeEntryList);
 
             calculationService.CalculateItems(timeEntryList);
@@ -48,11 +52,6 @@ namespace TogglReport.Domain.Services.Tests
         [TestMethod]
         public void Rounded_Hours_Correctness_Using_A_Random_Scenario()
         {
-            ConfigurationServiceBuilder configServiceBuilder = new ConfigurationServiceBuilder();
-            IConfigurationService configService = configServiceBuilder.Build();
-            TimesheetCalculationService calculationService = new TimesheetCalculationService(configService);
-            List<TimeEntry> timeEntryList = new List<TimeEntry>();
-
             BuildDataForTestingARandomScenario(timeEntryList);
 
             calculationService.CalculateItems(timeEntryList);
