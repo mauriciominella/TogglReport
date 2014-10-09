@@ -11,7 +11,7 @@ using TogglReport.Domain.Services;
 
 namespace TogglReport.Domain.Repository
 {
-    public class TimeEntryRepositoryWeb : ITimeEntryRepository
+    public class TimeEntryRepositoryToggl : ITimeEntryRepository
     {
         private const string url = "https://www.toggl.com/api/v8/time_entries";
 
@@ -19,7 +19,7 @@ namespace TogglReport.Domain.Repository
         private string _userpassB64 = String.Empty;
         private string _authHeader = String.Empty;
 
-        public TimeEntryRepositoryWeb()
+        public TimeEntryRepositoryToggl()
         {
             UserSettingsService userSettingsService = new UserSettingsService();
 

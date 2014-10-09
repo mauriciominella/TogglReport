@@ -8,7 +8,7 @@
             <TextBox IsReadOnly="True" x:Name="InstalationPath" BorderThickness="0" />
         </StackPanel>
         <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,20,0,0">
-            <Label FontSize="30" HorizontalAlignment="Center">Api token</Label>
+            <Label FontSize="30" HorizontalAlignment="Center">Toggl Api token</Label>
             <TextBox x:Name="ApiToken" Width="230" HorizontalContentAlignment="Center" />
             <Button x:Name="SaveApiToken" Content="Save" Margin="0,20,0,0" VerticalAlignment="Top" Width="100" HorizontalAlignment="Center" />
         </StackPanel>

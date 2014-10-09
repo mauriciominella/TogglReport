@@ -95,7 +95,7 @@ namespace TogglReport.Domain.ViewModel
 
         public TogglEntriesViewModel()
         {
-            DisplayName = "Toggl Time";
+            DisplayName = "Harvest Time";
             _calculationService = new TimesheetCalculationService();
         }
 
@@ -112,7 +112,7 @@ namespace TogglReport.Domain.ViewModel
 
         public void All()
         {
-            ITimeEntryRepository timeEntryCollection = new TimeEntryRepositoryWeb();
+            ITimeEntryRepository timeEntryCollection = new TimeEntryRepositoryHarvest();
             this.Items.Clear();
 
             TimeEntryCollection timeentries = timeEntryCollection.GetGroupingByDescAndDay();
@@ -178,7 +178,7 @@ namespace TogglReport.Domain.ViewModel
             {
                 try
                 {
-                    ITimeEntryRepository timeEntryCollection = new TimeEntryRepositoryWeb();
+                    ITimeEntryRepository timeEntryCollection = new TimeEntryRepositoryHarvest();
 
                     TimeEntryCollection timeentries = timeEntryCollection.GetGroupingByDescAndDayByDate(CurrentQueryDate);
                     this.Items = timeentries;
