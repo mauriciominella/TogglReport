@@ -10,8 +10,6 @@ namespace TogglReport.Domain.Services.Tests
     [TestClass]
     public class TimesheetCalculationServiceTests
     {
-        private const double expectedTotalHoursRounded = 7.5;
-
         ConfigurationServiceBuilder configServiceBuilder = null;
         IConfigurationService configService = null;
         TimesheetCalculationService calculationService = null;
@@ -32,9 +30,9 @@ namespace TogglReport.Domain.Services.Tests
         {
             BuildDataForTestingScenario1(timeEntryList);
 
-            calculationService.CalculateItems(timeEntryList);
-            
-            Assert.AreEqual(expectedTotalHoursRounded, calculationService.TotalHoursRounded);
+            calculationService.CalculateItems(timeEntryList, DateTime.Now);
+
+            Assert.AreEqual(configService.GetTotalHourForCurrentDay(DateTime.Now), calculationService.TotalHoursRounded);
         }
 
 
@@ -43,9 +41,9 @@ namespace TogglReport.Domain.Services.Tests
         {
             BuildDataForTestingScenario2(timeEntryList);
 
-            calculationService.CalculateItems(timeEntryList);
+            calculationService.CalculateItems(timeEntryList, DateTime.Now);
 
-            Assert.AreEqual(expectedTotalHoursRounded, calculationService.TotalHoursRounded);
+            Assert.AreEqual(configService.GetTotalHourForCurrentDay(DateTime.Now), calculationService.TotalHoursRounded);
         }
 
 
@@ -54,9 +52,9 @@ namespace TogglReport.Domain.Services.Tests
         {
             BuildDataForTestingARandomScenario(timeEntryList);
 
-            calculationService.CalculateItems(timeEntryList);
+            calculationService.CalculateItems(timeEntryList, DateTime.Now);
 
-            Assert.AreEqual(expectedTotalHoursRounded, calculationService.TotalHoursRounded);
+            Assert.AreEqual(configService.GetTotalHourForCurrentDay(DateTime.Now), calculationService.TotalHoursRounded);
         }
 
         private void BuildDataForTestingScenario1(List<TimeEntry> timeEntryList)

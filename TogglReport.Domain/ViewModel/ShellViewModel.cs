@@ -33,7 +33,8 @@ namespace TogglReport.Domain.ViewModel
             Dictionary<Type, int> tabOrder = new Dictionary<Type, int>();
             tabOrder.Add(typeof(TogglEntriesViewModel), 1);
             tabOrder.Add(typeof(BraviEntriesViewModel), 2);
-            tabOrder.Add(typeof(ConfigurationViewModel), 3);
+            tabOrder.Add(typeof(ReportViewModel), 3);
+            tabOrder.Add(typeof(ConfigurationViewModel), 4);
 
             IOrderedEnumerable<IScreen> orderedScreens = viewModels.OrderBy(t => tabOrder[t.GetType()]);
 

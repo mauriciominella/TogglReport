@@ -23,6 +23,7 @@ namespace TogglReport.Domain.ViewModel
         private string _dayOfWeek = String.Empty;
         private bool _loadingData = false;
         private TimesheetCalculationService _calculationService;
+        private double _hoursCurrentDay = 0;
 
         #endregion
 
@@ -48,6 +49,7 @@ namespace TogglReport.Domain.ViewModel
             {
                 _currentQueryDate = value;
                 DayOfWeek = _currentQueryDate.ToString("ddd");
+                HoursCurrentDay = ConfigurationService.GetInstance().GetTotalHourForCurrentDay(_currentQueryDate);
                 NotifyOfPropertyChange(() => CurrentQueryDate);
             }
         }
@@ -72,6 +74,20 @@ namespace TogglReport.Domain.ViewModel
             {
                 _dayOfWeek = value;
                 NotifyOfPropertyChange(() => DayOfWeek);
+            }
+        }
+
+
+        public double HoursCurrentDay
+        {
+            get
+            {
+                return _hoursCurrentDay;
+            }
+            set
+            {
+                _hoursCurrentDay = value;
+                NotifyOfPropertyChange(() => HoursCurrentDay);
             }
         }
 
@@ -141,7 +157,7 @@ namespace TogglReport.Domain.ViewModel
 
         public void CalculateTimeSheet()
         {
-            _calculationService.CalculateItems(this.Items.ToList());
+            _calculationService.CalculateItems(this.Items.ToList(), CurrentQueryDate);
             this.Items = new ObservableCollection<TimeEntry>(_calculationService.CalculatedList);
         }
 
@@ -170,6 +186,11 @@ namespace TogglReport.Domain.ViewModel
 
                     Caliburn.Micro.Execute.OnUIThread(ShowNoRecordsMessage); ;
                 });
+        }
+
+        private void StartLoading()
+        {
+            LoadingData = false;
         }
 
         private void FilterItemsAsync(System.Action sucesscallBack, Action<Exception> errorCallback)

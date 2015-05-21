@@ -75,5 +75,11 @@ namespace TogglReport.Domain.Tests.Fakes
         {
             get { throw new NotImplementedException(); }
         }
+
+
+        public double GetTotalHourForCurrentDay(DateTime date)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

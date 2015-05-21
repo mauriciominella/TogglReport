@@ -89,6 +89,7 @@
     <Compile Include="Services\TimesheetCalculationService.cs" />
     <Compile Include="Services\UserSettingsService.cs" />
     <Compile Include="ViewModel\BraviEntriesViewModel.cs" />
+    <Compile Include="ViewModel\ReportViewModel.cs" />
     <Compile Include="ViewModel\TogglEntriesViewModel.cs" />
     <Compile Include="ViewModel\ConfigurationViewModel.cs" />
     <Compile Include="ViewModel\ConfirmationBoxViewModel.cs" />

@@ -68,7 +68,7 @@ namespace TogglReport.Domain.Services
 
         #region Public Methods
 
-        public void CalculateItems(List<TimeEntry> listToCalculate)
+        public void CalculateItems(List<TimeEntry> listToCalculate, DateTime selectedDate)
         {
             _originalTimeEntryList = listToCalculate;
 
@@ -82,20 +82,20 @@ namespace TogglReport.Domain.Services
                 foreach (var item in _outputTimeEntryList)
                 {
                     item.percent = (item.duration * 100 / TotalDurationTime);
-                    item.hoursSuggested = (_configService.TotalHoursPerDay * (item.duration * 100 / TotalDurationTime) / 100);
-                    item.hoursSuggestedRounded = (_configService.TotalHoursPerDay * (item.duration * 100 / TotalDurationTime) / 100).RoundI(0.5);
+                    item.hoursSuggested = (_configService.GetTotalHourForCurrentDay(selectedDate) * (item.duration * 100 / TotalDurationTime) / 100);
+                    item.hoursSuggestedRounded = (_configService.GetTotalHourForCurrentDay(selectedDate) * (item.duration * 100 / TotalDurationTime) / 100).RoundI(0.25);
                 }
 
                 this._totalHoursRounded = _outputTimeEntryList.Sum(c => c.hoursSuggestedRounded);
 
-                double roundingDifference = _configService.TotalHoursPerDay - this.TotalHoursRounded;
+                double roundingDifference = _configService.GetTotalHourForCurrentDay(selectedDate) - this.TotalHoursRounded;
 
                 double hoursToDistribute = 0.0;
 
                 if (roundingDifference > 0)
-                    hoursToDistribute = 0.5;
+                    hoursToDistribute = 0.25;
                 else if (roundingDifference < 0)
-                    hoursToDistribute = -0.5;
+                    hoursToDistribute = -0.25;
 
                 DistributeHourToTimeEntries(roundingDifference, hoursToDistribute);
 
@@ -107,7 +107,7 @@ namespace TogglReport.Domain.Services
         {
             if (hoursToDistribute != 0)
             {
-                int numberOfUnitsWithDifference = Math.Abs((int)(roundingDifference / 0.5));
+                int numberOfUnitsWithDifference = Math.Abs((int)(roundingDifference / 0.25));
 
                 //Distribuite the difference to all records
                 for (int i = 0; i < numberOfUnitsWithDifference; i++)

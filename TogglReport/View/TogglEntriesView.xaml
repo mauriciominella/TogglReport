@@ -6,6 +6,7 @@
         <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
             <TextBlock x:Name="CurrentQueryDate" FontSize="30" Text="{Binding Path=CurrentQueryDate, StringFormat=dd-MM-yyyy}" />
             <TextBlock x:Name="DayOfWeek" Text="{Binding Path=DayOfWeek, StringFormat=({0:P0})}" FontSize="30" />
+            <TextBlock x:Name="HoursCurrentDay" Text="{Binding Path=HoursCurrentDay, StringFormat=(Hours: {0})}" FontSize="30" />
         </StackPanel>
         <Canvas Panel.ZIndex="1" x:Name="LoadingData" HorizontalAlignment="Center">
             <StackPanel Orientation="Vertical" Margin="0,60">

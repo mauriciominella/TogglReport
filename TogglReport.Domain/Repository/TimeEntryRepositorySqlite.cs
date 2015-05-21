@@ -13,7 +13,7 @@ namespace TogglReport.Domain.Repository
 {
     public class TimeEntryRepositorySqlite : ITimeEntryRepository
     {
-        private const double totalHoursDay = 7.5;
+        private const double totalHoursDay = 8.5;
 
         public ObservableCollection<TimeEntry> GetAll()
         {
