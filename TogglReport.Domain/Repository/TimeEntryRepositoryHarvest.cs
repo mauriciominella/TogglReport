@@ -30,7 +30,7 @@ namespace TogglReport.Domain.Repository
         {
             UserSettingsService userSettingsService = new UserSettingsService();
 
-            _provider = new RestRequestProvider("bravi", "mauricio.minella@bravi.com.br", "Maidenmba1060");
+            _provider = new RestRequestProvider("bravi", "xxxxx", "xxxx");
             _repository = new Harvest.Api.Repository(_provider);
 
             MapHarvestEntityToTimeEntryEntity();
